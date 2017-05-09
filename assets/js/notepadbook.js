@@ -29,16 +29,16 @@ $(document).ready(function () {
     if (user) {
       firebase.auth().currentUser.sendEmailVerification().then(function() {
         // Email sent.
-        $(".message").html("ACCOUNT CREATED. YOU CAN NOW LOGIN.");
+        $(".message").html("done");
       }, function(error) {
         // An error happened.
-        $(".message").html("PLEASE CHECK YOUR EMAIL!");
+        $(".message").html("please check your email!");
       });
       var displayName =$(".upTestname").val();
     	var  currentUser = firebase.auth().currentUser;
     	currentUser.updateProfile({
     	displayName: displayName,
-    	photoURL: 'assets/img/avatar.jpg'
+    	photoURL: 'https://static.wixstatic.com/media/745f4f_518640ca13a1467baca18fe6181ea912~mv2.png/v1/fill/w_190,h_190,al_c,usm_0.66_1.00_0.01/745f4f_518640ca13a1467baca18fe6181ea912~mv2.png'
     	}).then(function() {
     // Update successful.
     	}, function(error) {
@@ -51,11 +51,11 @@ $(document).ready(function () {
     	var uid = user.uid;
     	var providerData = user.providerData;
     	$(".userName").html(user.displayName);
-    	$(".userName").append("<img class='avimg' src='assets/img/avatar.jpg'>");
+    	$(".userName").append("<img src='photoURL'>");
       localStorage.clear();
-			localStorage.setItem("key", uid);
-			localStorage.setItem("name", user.displayName);
-			localStorage.setItem("photo", photoURL);
+      localStorage.setItem("key", uid);
+      localStorage.setItem("name", user.displayName);
+      localStorage.setItem("photo", photoURL);
     	console.log(user);
     	console.log(uid);
     	firebase.database().ref(uid).set({ emailAddress:email});
@@ -104,11 +104,10 @@ $(document).ready(function () {
 			var uid = user.uid;
 			var providerData = user.providerData;
 			$(".userName").html(user.displayName);
-			$(".userName").append("<img style='margin-left:15px;' class='avimg' src='assets/img/avatar.jpg'>");
+			$(".userName").append("<img src='photoURL'>");
 			console.log(user);
 			console.log(uid);
 			firebase.database().ref().child(uid);
-			console.log(signUp);
 			localStorage.clear();
 			localStorage.setItem("key", uid);
 			localStorage.setItem("name", user.displayName);
@@ -159,10 +158,6 @@ $(document).ready(function () {
   });
 
 
-	var quill = new Quill('#editor', {
-    theme: 'snow'
-  });
-
   $(".rP").on("click", function(event){
 
     event.preventDefault();
@@ -175,9 +170,6 @@ $(document).ready(function () {
   		$(".checkEmail").html("wrong Email!");
 		});
   });
-
-});
-
 
 //Text Editor.
   var toolbarOptions = [
