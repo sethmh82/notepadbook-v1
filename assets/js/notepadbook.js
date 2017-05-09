@@ -410,4 +410,3 @@ $(document).ready(function () {
     },
     theme: 'snow'
   });
->>>>>>> origin/master
